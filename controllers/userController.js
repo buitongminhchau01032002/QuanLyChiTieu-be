@@ -16,9 +16,9 @@ const getUserById = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            return next(new ResError(404, 'Không tìm thấy tài khoản!'));
+            throw new ResError(404, 'Không tìm thấy tài khoản!');
         }
-        res.json(user);
+        res.status(200).json(user);
     } catch (err) {
         next(err);
     }
@@ -29,9 +29,9 @@ const getUserByEmail = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.params.email });
         if (!user) {
-            return next(new ResError(404, 'Không tìm thấy tài khoản!'));
+            throw new ResError(404, 'Không tìm thấy tài khoản!');
         }
-        res.json(user);
+        res.status(200).json(user);
     } catch (err) {
         next(err);
     }
