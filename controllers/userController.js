@@ -1,8 +1,8 @@
-import ResError from '../models/ResError.js';
+import ResError from '../utils/ResError.js';
 import User from '../models/User.js';
 
 // [GET] /users
-const getUsers = async (req, res, next) => {
+export const getUsers = async (req, res, next) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -12,7 +12,7 @@ const getUsers = async (req, res, next) => {
 };
 
 // [GET] /users/:id
-const getUserById = async (req, res, next) => {
+export const getUserById = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
@@ -25,7 +25,7 @@ const getUserById = async (req, res, next) => {
 };
 
 // [GET] /users/email/:email
-const getUserByEmail = async (req, res, next) => {
+export const getUserByEmail = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.params.email });
         if (!user) {
@@ -36,5 +36,3 @@ const getUserByEmail = async (req, res, next) => {
         next(err);
     }
 };
-
-export { getUsers, getUserById, getUserByEmail };
