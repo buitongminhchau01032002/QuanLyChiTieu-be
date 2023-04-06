@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import corsConfig from './configs/cors.js';
 import connectDB from './configs/db.js';
 import route from './routes/index.js';
+import errorHandler from './middlewares/errorHandler.js';
 
 dotenv.config();
 connectDB();
@@ -18,6 +19,8 @@ app.use('/api', route);
 app.get('/', (req, res) => {
     res.send('<h1>Hello world!</h1>');
 });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
