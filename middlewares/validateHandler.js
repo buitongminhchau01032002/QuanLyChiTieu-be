@@ -8,7 +8,6 @@ const validationHandler = (req, res, next) => {
         error.validationErrors = errors.array();
         return next(error);
     }
-
     next();
 };
 
