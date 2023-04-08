@@ -6,7 +6,7 @@ import isAuth from '../middlewares/isAuth.js';
 
 const router = express.Router();
 
-router.get('/list', isAuth, getWalletsByUserId)
+router.get('/cur-user', isAuth, getWalletsByUserId)
 router.post('/create', isAuth, createWalletValidator,validationHandler, createWallet)
 router.get('/:id', getWalletsByIdValidator, validationHandler, getWalletsById)
 router.get('/', getWallets);
