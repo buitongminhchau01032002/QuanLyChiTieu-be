@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/user.js';
+import User from '../models/User.js';
 import ResError from '../utils/ResError.js';
 
 const isAuth = async (req, res, next) => {
@@ -12,6 +12,7 @@ const isAuth = async (req, res, next) => {
         }
         req.token = token;
         req.user = user;
+        console.log(user);
         next();
     } catch (error) {
         return next(new ResError(401, 'Không xác thực được tài khoản'));

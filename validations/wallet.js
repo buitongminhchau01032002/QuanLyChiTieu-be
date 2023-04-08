@@ -2,7 +2,7 @@ import { body, param } from 'express-validator';
 
 export const createWalletValidator = [
     body('name').notEmpty().withMessage('Tên là bắt buộc'),
-    body('userId').isMongoId().withMessage('Id không hợp lệ'),
+    body('balance').notEmpty().withMessage('Số dư ví không được để trống'),
     
 ];
 

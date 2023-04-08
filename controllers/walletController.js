@@ -17,10 +17,15 @@ export const getWallets = async (req, res, next) => {
 //[POST] /wallets/create
 export const createWallet = async (req, res, next) => {
     try {
-        const { name, userId, balance } = req.body;
+         //const { name, _id, balance } = req.body.user;
+         //console.log(req.body.user);
+
+         const name = req.body.name;
+         const userId = req.user._id;
+         const balance = req.body.balance;
 
         //create a new wallet
-        const newWallet = new Wallet({ name, userId, balance })
+        const newWallet = new Wallet({name, userId, balance })
         await newWallet.save();
 
         res.status(201).json(newWallet);
@@ -44,10 +49,12 @@ export const getWalletsById = async (req, res, next) => {
     }
 };
 
-// [GET] /wallets/:userId
+// [GET] /wallets/list
 export const getWalletsByUserId = async (req, res, next) => {
     try {
-        const user = await User.findById({_id:req.params.userId});
+        //const user = await User.findById({_id:req.params.userId});
+        const user = await User.findById({_id:req.user._id});
+
         if (!user) {
             throw new ResError(404, 'Không tìm thấy user!');
         }
