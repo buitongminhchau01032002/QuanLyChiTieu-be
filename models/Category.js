@@ -12,6 +12,11 @@ const categorySchema = new mongoose.Schema(
             default: false,
             require: true,
        },
+       limit: {
+            type: Number,
+            default: -1,
+            require: true,
+       },
        userId: {
         type: String,
         required: true,

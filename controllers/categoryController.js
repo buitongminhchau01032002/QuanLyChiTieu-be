@@ -22,11 +22,12 @@ export const createCategory = async (req, res, next) => {
 
         const name = req.body.name;
         const type = req.body.type;
+        const limit = req.body.limit <= 0 ? -1 : (req.body.limit);
         const userId = req.user._id;
         const walletId = req.body.walletId;
 
         //create a new category
-        const newCategory = new Category({ name, type, userId, walletId })
+        const newCategory = new Category({ name, type, limit, userId, walletId })
         await newCategory.save();
 
         res.status(201).json(newCategory);
