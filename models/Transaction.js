@@ -14,7 +14,7 @@ const transactionSchema = new mongoose.Schema(
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'users',
+            ref: 'User',
             require: true,
         },
         description: {
@@ -28,6 +28,6 @@ const transactionSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Transaction = mongoose.model('transactions', transactionSchema);
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
 export default Transaction;

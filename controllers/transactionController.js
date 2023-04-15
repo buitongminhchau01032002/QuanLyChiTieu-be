@@ -7,13 +7,11 @@ export const getTransactionsOfUser = async (req, res, next) => {
     const month = req.query.month;
     const user = req.user;
     try {
-        const transactions = await Transaction.find({ user: user._id }).populate('wallet').populate('category');
-        res.json(
-            transactions.map((transaction) => ({
-                ...transaction.toObject(),
-                user,
-            }))
-        );
+        const transactions = await Transaction.find({ user: user._id })
+            .populate('wallet')
+            .populate('category')
+            .populate({ path: 'user', select: '-password' });
+        res.json(transactions);
     } catch (err) {
         next(err);
     }
@@ -22,7 +20,10 @@ export const getTransactionsOfUser = async (req, res, next) => {
 // [GET] /transactions/:id
 export const getTransactionById = async (req, res, next) => {
     try {
-        const transaction = await Transaction.findById(req.params.id);
+        const transaction = await Transaction.findById(req.params.id)
+            .populate('wallet')
+            .populate('category')
+            .populate({ path: 'user', select: '-password' });
         if (!transaction) {
             throw new ResError(404, 'Không tìm thấy giao dịch!');
         }
